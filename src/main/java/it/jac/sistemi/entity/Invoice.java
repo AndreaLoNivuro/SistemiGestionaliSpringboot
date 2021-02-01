@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
-@Table(name = "invoice")
+@Table(name = "invoices")
 @Data
 public class Invoice {
 

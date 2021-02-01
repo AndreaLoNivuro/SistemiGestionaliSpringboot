@@ -10,7 +10,7 @@ import it.jac.sistemi.pk.PkInvoiceDetail;
 import lombok.Data;
 
 @Entity
-@Table(name = "invoice_detail")
+@Table(name = "invoices_detail")
 @IdClass(PkInvoiceDetail.class)
 @Data
 public  class InvoiceDetail {

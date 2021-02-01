@@ -8,12 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import it.jac.sistemi.pk.PkOrder;
 import lombok.Data;
 
 @Entity
 @Table(name = "order")
-@IdClass(PkOrder.class)
 @Data
 public  class Order {
 
@@ -22,7 +20,6 @@ public  class Order {
 	@Column(name = "cod_order")
 	private int codOrder;
 
-	@Id
 	@Column(name = "cod_client")
 	private int codClient;
 

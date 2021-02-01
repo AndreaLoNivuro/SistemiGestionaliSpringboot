@@ -13,17 +13,17 @@ public class InvoiceDetailDTO {
 
 	private String lot;
 
-	private int quantity;
+	private float quantity;
 
 	private int currency;
 
-	private int vat;
+	private float vat;
 
-	private int taxable;
+	private float taxable;
 
-	private int discount;
+	private float discount;
 
-	private int price;
+	private float price;
 
 	public static InvoiceDetailDTO build(InvoiceDetail invoiceDetail) {
 

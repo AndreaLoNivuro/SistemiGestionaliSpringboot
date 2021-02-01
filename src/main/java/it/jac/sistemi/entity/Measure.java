@@ -20,10 +20,10 @@ public class Measure {
 	private int codMeasure;
 	
 	@Column(name = "description")
-	private int description;
+	private String description;
 	
 	@Column(name = "symbol")
-	private int symbol;
+	private char symbol;
 	
 	@Column(name = "note")
 	private String note;

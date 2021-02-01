@@ -10,9 +10,9 @@ public class ClientDTO {
 
 	private int codClient;
 
-	private int businessName;
+	private String businessName;
 
-	private int piva;
+	private String piva;
 
 	private String fiscalCod;
 
@@ -22,13 +22,13 @@ public class ClientDTO {
 
 	private String cel;
 
-	private int city;
+	private String city;
 
-	private int address;
+	private String address;
 
-	private int province;
+	private String province;
 
-	private int cap;
+	private String cap;
 
 	public static ClientDTO build(Client client) {
 

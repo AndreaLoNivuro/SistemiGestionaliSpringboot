@@ -11,11 +11,11 @@ public class ItemDTO {
 
 	private int codItem;
 
-	private int description;
+	private String description;
 
-	private int price;
+	private float price;
 
-	private String measure;
+	private int measure;
 
 	private String type;
 

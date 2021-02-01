@@ -28,22 +28,22 @@ public  class InvoiceDetail {
 	private String lot;
 	
 	@Column(name = "quantity")
-	private int quantity;
+	private float quantity;
 	
 	@Column(name = "currency")
 	private int currency;
 	
 	@Column(name = "vat")
-	private int vat;
+	private float vat;
 	
 	@Column(name = "taxable")
-	private int taxable;
+	private float taxable;
 	
 	@Column(name = "discount")
-	private int discount;
+	private float discount;
 	
 	@Column(name = "price")
-	private int price;
+	private float price;
 
 	@Override
 	public String toString() {

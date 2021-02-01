@@ -21,19 +21,19 @@ public  class InvoiceSummary {
 
 	@Id
 	@Column(name = "total_amount")
-	private int totalAmount;
+	private float totalAmount;
 	
 	@Column(name = "payment")
-	private int payment;
+	private String payment;
 	
 	@Column(name = "currency")
 	private int currency;
 	
 	@Column(name = "vat")
-	private int vat;
+	private float vat;
 	
 	@Column(name = "taxable")
-	private int taxable;
+	private float taxable;
 
 	@Override
 	public String toString() {

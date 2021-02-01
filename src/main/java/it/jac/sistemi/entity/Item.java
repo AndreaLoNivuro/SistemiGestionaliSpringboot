@@ -20,13 +20,13 @@ public class Item {
 	private int codItem;
 	
 	@Column(name = "description")
-	private int description;
+	private String description;
 	
 	@Column(name = "price")
-	private int price;
+	private float price;
 	
 	@Column(name = "measure")
-	private String measure;
+	private int measure;
 
 	@Column(name = "type")
 	private String type;

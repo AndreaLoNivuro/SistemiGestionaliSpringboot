@@ -10,15 +10,15 @@ public class InvoiceSummaryDTO {
 
 	private int codInvoice;
 
-	private int totalAmount;
+	private float totalAmount;
 	
-	private int payment;
+	private String payment;
 	
 	private int currency;
 	
-	private int vat;
+	private float vat;
 	
-	private int taxable;
+	private float taxable;
 
 	public static InvoiceSummaryDTO build(InvoiceSummary invoiceSummary) {
 

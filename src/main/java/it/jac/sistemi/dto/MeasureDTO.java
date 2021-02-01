@@ -10,9 +10,9 @@ public class MeasureDTO {
 
 	private int codMeasure;
 
-	private int description;
+	private String description;
 
-	private int symbol;
+	private char symbol;
 
 	private String note;
 

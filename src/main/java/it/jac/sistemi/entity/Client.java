@@ -20,10 +20,10 @@ public class Client {
 	private int codClient;
 	
 	@Column(name = "business_name")
-	private int businessName;
+	private String businessName;
 	
 	@Column(name = "piva")
-	private int piva;
+	private String piva;
 	
 	@Column(name = "fiscal_cod")
 	private String fiscalCod;
@@ -38,16 +38,16 @@ public class Client {
 	private String cel;
 	
 	@Column(name = "city")
-	private int city;
+	private String city;
 	
 	@Column(name = "address")
-	private int address;
+	private String address;
 	
 	@Column(name = "province")
-	private int province;
+	private String province;
 	
 	@Column(name = "cap")
-	private int cap;
+	private String cap;
 	
 	@Override
 	public String toString() {

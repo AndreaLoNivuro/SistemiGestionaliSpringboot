@@ -11,7 +11,7 @@ public class InvoiceDetailDTO {
 
 	private int codItem;
 
-	private int lot;
+	private String lot;
 
 	private int quantity;
 

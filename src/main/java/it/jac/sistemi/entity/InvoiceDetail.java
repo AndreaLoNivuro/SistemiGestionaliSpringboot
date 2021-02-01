@@ -25,7 +25,7 @@ public  class InvoiceDetail {
 	
 	@Id
 	@Column(name = "lot")
-	private int lot;
+	private String lot;
 	
 	@Column(name = "quantity")
 	private int quantity;

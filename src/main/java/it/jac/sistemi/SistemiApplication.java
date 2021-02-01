@@ -1,4 +1,4 @@
-package it.jac.lynx;
+package it.jac.sistemi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -7,11 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "it.jac.lynx")
-public class LynxApplication {
+@ComponentScan(basePackages = "it.jac.sistemi")
+public class SistemiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LynxApplication.class, args);
+		SpringApplication.run(SistemiApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package it.jac.lynx.configuration;
+package it.jac.sistemi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

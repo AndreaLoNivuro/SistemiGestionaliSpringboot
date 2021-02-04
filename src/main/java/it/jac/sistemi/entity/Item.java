@@ -33,7 +33,7 @@ public class Item {
 	private String category;
 	
 	@Column(name = "discount")
-	private String discount;
+	private float discount;
 	
 	@Column(name = "vat")
 	private float vat;

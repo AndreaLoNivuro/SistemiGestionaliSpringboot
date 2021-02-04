@@ -60,7 +60,7 @@ public  class InvoiceDetail {
 	private float taxable;
 	
 	@Column(name = "cod_vat")
-	private float codVat;
+	private String codVat;
 	
 	@Column(name = "total_line")
 	private float totalLine;

@@ -33,7 +33,7 @@ public class InvoiceDetailDTO {
 
 	private float taxable;
 
-	private float codVat;
+	private String codVat;
 
 	private float totalLine;
 

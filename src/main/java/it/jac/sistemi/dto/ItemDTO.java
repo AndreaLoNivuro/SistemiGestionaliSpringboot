@@ -20,7 +20,7 @@ public class ItemDTO {
 
 	private String category;
 	
-	private String discount;
+	private float discount;
 	
 	private float vat;
 

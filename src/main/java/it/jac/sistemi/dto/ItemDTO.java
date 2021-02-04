@@ -1,8 +1,5 @@
 package it.jac.sistemi.dto;
 
-
-import javax.persistence.Column;
-
 import org.springframework.beans.BeanUtils;
 
 import it.jac.sistemi.entity.Item;

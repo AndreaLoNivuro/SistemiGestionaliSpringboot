@@ -12,12 +12,11 @@ import lombok.Data;
 @Entity
 @Table(name = "measures")
 @Data
-public class Measure {
+public class Measures {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_measure")
-	private int codMeasure;
+	private String codMeasure;
 	
 	@Column(name = "description")
 	private String description;

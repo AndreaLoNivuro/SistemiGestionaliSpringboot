@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public  class PkInvoiceSummary implements Serializable {
 
-	private int codInvoice;
+	private String codInvoice;
 	
-	private int totalAmount;
+	private String totalAmount;
 	
 
 }

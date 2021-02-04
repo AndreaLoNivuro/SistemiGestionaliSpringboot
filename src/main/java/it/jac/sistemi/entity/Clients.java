@@ -12,12 +12,11 @@ import lombok.Data;
 @Entity
 @Table(name = "clients")
 @Data
-public class Client {
+public class Clients {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_client")
-	private int codClient;
+	private String codClient;
 	
 	@Column(name = "business_name")
 	private String businessName;

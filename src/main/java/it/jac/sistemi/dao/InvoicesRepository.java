@@ -3,10 +3,10 @@ package it.jac.sistemi.dao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import it.jac.sistemi.entity.Order;
+import it.jac.sistemi.entity.Invoices;
 
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Integer> {
+public interface InvoicesRepository extends CrudRepository<Invoices, String> {
 	
 	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
 	

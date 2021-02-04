@@ -16,18 +16,20 @@ import lombok.Data;
 @Entity
 @Table(name = "invoices")
 @Data
-public class Invoice {
+public class Invoices {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_invoice")
-	private int codInvoice;
+	private String codInvoice;
 	
 	@Column(name = "client")
-	private int client;
+	private String client;
 	
-	@Column(name = "cod_order")
-	private int codOrder;
+	@Column(name = "payment")
+	private String payment;
+	
+	@Column(name = "order")
+	private String order;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date")
@@ -35,7 +37,7 @@ public class Invoice {
 	
 	@Override
 	public String toString() {
-		return "Invoice [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + codOrder + "]";
+		return "Invoice [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + order + "]";
 	}
 
 }

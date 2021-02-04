@@ -1,21 +1,21 @@
 package it.jac.sistemi.dto;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.InvoiceDetail;
+import it.jac.sistemi.entity.InvoicesDetail;
 import lombok.Data;
 
 @Data
-public class InvoiceDetailDTO {
+public class InvoicesDetailDTO {
 
-	private int codInvoice;
+	private String codInvoice;
 
-	private int codItem;
+	private String codItem;
 
 	private String lot;
 
 	private float quantity;
-
-	private int currency;
 
 	private float vat;
 
@@ -24,10 +24,12 @@ public class InvoiceDetailDTO {
 	private float discount;
 
 	private float price;
+	
+	private Date expiry;
 
-	public static InvoiceDetailDTO build(InvoiceDetail invoiceDetail) {
+	public static InvoicesDetailDTO build(InvoicesDetail invoiceDetail) {
 
-		InvoiceDetailDTO result = new InvoiceDetailDTO();
+		InvoicesDetailDTO result = new InvoicesDetailDTO();
 		BeanUtils.copyProperties(invoiceDetail, result);
 
 		return result;

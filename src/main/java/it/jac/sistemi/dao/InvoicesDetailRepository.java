@@ -3,11 +3,11 @@ package it.jac.sistemi.dao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import it.jac.sistemi.entity.InvoiceSummary;
-import it.jac.sistemi.pk.PkInvoiceSummary;
+import it.jac.sistemi.entity.InvoicesDetail;
+import it.jac.sistemi.pk.PkInvoiceDetail;
 
 @Repository
-public interface InvoiceSummaryRepository extends CrudRepository<InvoiceSummary, PkInvoiceSummary> {
+public interface InvoicesDetailRepository extends CrudRepository<InvoicesDetail, PkInvoiceDetail> {
 	
 	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
 	

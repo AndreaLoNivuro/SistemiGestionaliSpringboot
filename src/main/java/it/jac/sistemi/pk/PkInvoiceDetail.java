@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public  class PkInvoiceDetail implements Serializable {
 
-	private int codInvoice;
+	private String codInvoice;
 	
-	private int codItem;
+	private String codItem;
 	
-	private String lot;	
+	private int line;	
 
 }

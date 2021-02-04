@@ -12,12 +12,11 @@ import lombok.Data;
 @Entity
 @Table(name = "items")
 @Data
-public class Item {
+public class Items {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_item")
-	private int codItem;
+	private String codItem;
 	
 	@Column(name = "description")
 	private String description;
@@ -30,9 +29,16 @@ public class Item {
 
 	@Column(name = "type")
 	private String type;
+	//prodotto o servizio
 	
-	@Column(name = "producer")
-	private String producer;
+	@Column(name = "category")
+	private String category;
+	
+	@Column(name = "discount")
+	private String discount;
+	
+	@Column(name = "vat")
+	private float vat;
 	
 	@Override
 	public String toString() {

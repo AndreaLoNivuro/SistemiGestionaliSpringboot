@@ -11,21 +11,31 @@ public class InvoiceDetailDTO {
 
 	private String codInvoice;
 
+	private int line;
+
 	private String codItem;
 
-	private String lot;
+	private String description;
+
+	private String measure;
 
 	private float quantity;
 
-	private float vat;
+	private String lot;
 
-	private float taxable;
+	private Date expiry;
+
+	private float unitPrice;
 
 	private float discount;
 
-	private float price;
-	
-	private Date expiry;
+	private float totalDiscount;
+
+	private float taxable;
+
+	private float codVat;
+
+	private float totalLine;
 
 	public static InvoiceDetailDTO build(InvoiceDetail invoiceDetail) {
 

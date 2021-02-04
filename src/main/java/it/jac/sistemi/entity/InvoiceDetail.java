@@ -32,16 +32,16 @@ public  class InvoiceDetail {
 	private String codItem;
 	
 	@Column(name = "description")
-	private float description;
+	private String description;
 	
 	@Column(name = "measure")
-	private float measure;
+	private String measure;
 	
 	@Column(name = "quantity")
 	private float quantity;
 	
 	@Column(name = "lot")
-	private int lot;
+	private String lot;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "expiry")

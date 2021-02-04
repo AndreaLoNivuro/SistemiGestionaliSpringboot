@@ -2,11 +2,11 @@ package it.jac.sistemi.dto;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.Clients;
+import it.jac.sistemi.entity.Client;
 import lombok.Data;
 
 @Data
-public class ClientsDTO {
+public class ClientDTO {
 
 	private String codClient;
 
@@ -30,9 +30,9 @@ public class ClientsDTO {
 
 	private String cap;
 
-	public static ClientsDTO build(Clients client) {
+	public static ClientDTO build(Client client) {
 
-		ClientsDTO result = new ClientsDTO();
+		ClientDTO result = new ClientDTO();
 		BeanUtils.copyProperties(client, result);
 
 		return result;

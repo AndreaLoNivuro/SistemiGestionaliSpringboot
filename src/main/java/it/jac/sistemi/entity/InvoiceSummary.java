@@ -13,7 +13,7 @@ import lombok.Data;
 @Table(name = "invoices_summary")
 @IdClass(PkInvoiceSummary.class)
 @Data
-public  class InvoicesSummary {
+public  class InvoiceSummary {
 
 	@Id
 	@Column(name = "cod_invoice")

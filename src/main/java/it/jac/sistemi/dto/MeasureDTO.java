@@ -2,11 +2,11 @@ package it.jac.sistemi.dto;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.Measures;
+import it.jac.sistemi.entity.Measure;
 import lombok.Data;
 
 @Data
-public class MeasuresDTO {
+public class MeasureDTO {
 
 	private String codMeasure;
 
@@ -16,9 +16,9 @@ public class MeasuresDTO {
 
 	private String note;
 
-	public static MeasuresDTO build(Measures measure) {
+	public static MeasureDTO build(Measure measure) {
 
-		MeasuresDTO result = new MeasuresDTO();
+		MeasureDTO result = new MeasureDTO();
 		BeanUtils.copyProperties(measure, result);
 
 		return result;

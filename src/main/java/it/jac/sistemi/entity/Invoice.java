@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "invoices")
 @Data
-public class Invoices {
+public class Invoice {
 
 	@Id
 	@Column(name = "cod_invoice")

@@ -4,11 +4,11 @@ import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.Invoices;
+import it.jac.sistemi.entity.Invoice;
 import lombok.Data;
 
 @Data
-public class InvoicesDTO {
+public class InvoiceDTO {
 
 	private String codInvoice;
 
@@ -20,9 +20,9 @@ public class InvoicesDTO {
 
 	private Date date;
 
-	public static InvoicesDTO build(Invoices invoice) {
+	public static InvoiceDTO build(Invoice invoice) {
 
-		InvoicesDTO result = new InvoicesDTO();
+		InvoiceDTO result = new InvoiceDTO();
 		BeanUtils.copyProperties(invoice, result);
 
 		return result;

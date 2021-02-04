@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Table(name = "measures")
 @Data
-public class Measures {
+public class Measure {
 
 	@Id
 	@Column(name = "cod_measure")

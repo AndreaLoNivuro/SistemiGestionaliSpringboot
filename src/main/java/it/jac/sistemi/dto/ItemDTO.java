@@ -5,11 +5,11 @@ import javax.persistence.Column;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.Items;
+import it.jac.sistemi.entity.Item;
 import lombok.Data;
 
 @Data
-public class ItemsDTO {
+public class ItemDTO {
 
 	private String codItem;
 
@@ -27,9 +27,9 @@ public class ItemsDTO {
 	
 	private float vat;
 
-	public static ItemsDTO build(Items item) {
+	public static ItemDTO build(Item item) {
 
-		ItemsDTO result = new ItemsDTO();
+		ItemDTO result = new ItemDTO();
 		BeanUtils.copyProperties(item, result);
 
 		return result;

@@ -3,11 +3,11 @@ import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.InvoicesDetail;
+import it.jac.sistemi.entity.InvoiceDetail;
 import lombok.Data;
 
 @Data
-public class InvoicesDetailDTO {
+public class InvoiceDetailDTO {
 
 	private String codInvoice;
 
@@ -27,9 +27,9 @@ public class InvoicesDetailDTO {
 	
 	private Date expiry;
 
-	public static InvoicesDetailDTO build(InvoicesDetail invoiceDetail) {
+	public static InvoiceDetailDTO build(InvoiceDetail invoiceDetail) {
 
-		InvoicesDetailDTO result = new InvoicesDetailDTO();
+		InvoiceDetailDTO result = new InvoiceDetailDTO();
 		BeanUtils.copyProperties(invoiceDetail, result);
 
 		return result;

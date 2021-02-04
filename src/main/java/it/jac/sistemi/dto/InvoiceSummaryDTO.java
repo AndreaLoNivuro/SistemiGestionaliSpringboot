@@ -2,11 +2,11 @@ package it.jac.sistemi.dto;
 
 import org.springframework.beans.BeanUtils;
 
-import it.jac.sistemi.entity.InvoicesSummary;
+import it.jac.sistemi.entity.InvoiceSummary;
 import lombok.Data;
 
 @Data
-public class InvoicesSummaryDTO {
+public class InvoiceSummaryDTO {
 
 	private String codInvoice;
 
@@ -28,9 +28,9 @@ public class InvoicesSummaryDTO {
 	
 	private float taxable;
 
-	public static InvoicesSummaryDTO build(InvoicesSummary invoiceSummary) {
+	public static InvoiceSummaryDTO build(InvoiceSummary invoiceSummary) {
 
-		InvoicesSummaryDTO result = new InvoicesSummaryDTO();
+		InvoiceSummaryDTO result = new InvoiceSummaryDTO();
 		BeanUtils.copyProperties(invoiceSummary, result);
 
 		return result;

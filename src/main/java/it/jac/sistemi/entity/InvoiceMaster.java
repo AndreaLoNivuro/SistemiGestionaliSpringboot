@@ -14,9 +14,9 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
-@Table(name = "invoices")
+@Table(name = "invoices_master")
 @Data
-public class Invoice {
+public class InvoiceMaster {
 
 	@Id
 	@Column(name = "cod_invoice")
@@ -37,7 +37,7 @@ public class Invoice {
 	
 	@Override
 	public String toString() {
-		return "Invoice [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + order + "]";
+		return "Invoice master [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + order + "]";
 	}
 
 }

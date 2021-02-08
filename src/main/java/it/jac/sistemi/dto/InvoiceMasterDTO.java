@@ -16,7 +16,7 @@ public class InvoiceMasterDTO {
 	
 	private String payment;
 
-	private String order;
+	private String orderNumber;
 
 	private Date date;
 

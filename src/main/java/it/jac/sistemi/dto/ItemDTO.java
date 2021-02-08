@@ -14,7 +14,7 @@ public class ItemDTO {
 
 	private float price;
 
-	private int measure;
+	private String measure;
 
 	private String type;
 

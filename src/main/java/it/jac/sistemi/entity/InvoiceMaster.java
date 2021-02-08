@@ -26,8 +26,8 @@ public class InvoiceMaster {
 	@Column(name = "payment")
 	private String payment;
 	
-	@Column(name = "order")
-	private String order;
+	@Column(name = "order_number")
+	private String orderNumber;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date")
@@ -35,7 +35,7 @@ public class InvoiceMaster {
 	
 	@Override
 	public String toString() {
-		return "Invoice master [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + order + "]";
+		return "Invoice master [cod invoice = " + codInvoice + ", client = " + client + ", cod order = " + orderNumber + "]";
 	}
 
 }

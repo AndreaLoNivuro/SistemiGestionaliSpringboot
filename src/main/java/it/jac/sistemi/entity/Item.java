@@ -23,7 +23,7 @@ public class Item {
 	private float price;
 	
 	@Column(name = "measure")
-	private int measure;
+	private String measure;
 
 	@Column(name = "type")
 	private String type;

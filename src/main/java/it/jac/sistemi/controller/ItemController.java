@@ -22,7 +22,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	@PostMapping("/create")
+	@PostMapping(path="/create")
 	public Response<?> createItem(
 			@RequestBody Item item
 			) {

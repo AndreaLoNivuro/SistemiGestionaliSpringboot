@@ -21,33 +21,29 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@GetMapping(path="/findAll")
+	public Response<?> findAllItems() {
+		
+		log.info("Richiesta di find all Item.");
+		
+		return itemService.findAllItems();
+		
+	}
 
 	@PostMapping(path="/create")
-	public Response<?> createItem(
-			@RequestBody Item item
-			) {
+	public Response<?> createItem(@RequestBody Item item) {
 		
-		log.info("richiesta di create.");
+		log.info("Richiesta di create Item.");
 
 		return itemService.createItem(item);
 
 	}
 	
-	@GetMapping(path="/findAll")
-	public Response<?> findAllItems() {
-		
-		log.info("richiesta di find all.");
-		
-		return itemService.findAllItems();
-		
-	}
-	
 	@PostMapping(path = "/delete")
-	public Response<?> deleteItem(
-			@RequestBody Item item
-			) {
+	public Response<?> deleteItem(@RequestBody Item item) {
 
-		log.info("Richiesta di delete.");
+		log.info("Richiesta di delete Item.");
 
 		return itemService.deleteItem(item);
 		

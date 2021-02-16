@@ -22,7 +22,7 @@ public class ItemDTO {
 	
 	private float discount;
 	
-	private float vat;
+	private String vat;
 
 	public static ItemDTO build(Item item) {
 

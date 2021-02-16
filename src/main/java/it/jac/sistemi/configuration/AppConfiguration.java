@@ -24,6 +24,7 @@ public class AppConfiguration extends WebSecurityConfigurerAdapter implements We
 		registry.addMapping("/measure/**").allowedMethods("GET", "POST");
 		registry.addMapping("/invoice/**").allowedMethods("GET", "POST");
 		registry.addMapping("/category/**").allowedMethods("GET", "POST");
+		registry.addMapping("/vat/**").allowedMethods("GET", "POST");
 	}
 
 	@Override

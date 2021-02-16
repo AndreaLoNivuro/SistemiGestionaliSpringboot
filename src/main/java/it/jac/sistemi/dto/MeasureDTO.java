@@ -12,7 +12,7 @@ public class MeasureDTO {
 
 	private String description;
 
-	private char symbol;
+	private String symbol;
 
 	private String note;
 

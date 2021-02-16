@@ -36,7 +36,7 @@ public class Item {
 	private float discount;
 	
 	@Column(name = "vat")
-	private float vat;
+	private String vat;
 	
 	@Override
 	public String toString() {

@@ -76,7 +76,7 @@ public class ItemService {
 			
 			this.itemsRepository.delete(item);			
 
-			response.setResult("item eliminato.");
+			response.setResult("Item eliminato.");
 
 		} catch (Exception e) {
 

@@ -19,8 +19,8 @@ public class Measure {
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "symbol")
-	private char symbol;
+	@Column(name = "symbol", length = 3)
+	private String symbol;
 	
 	@Column(name = "note")
 	private String note;

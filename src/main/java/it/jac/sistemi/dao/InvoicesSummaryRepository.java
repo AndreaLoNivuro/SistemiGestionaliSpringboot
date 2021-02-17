@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import it.jac.sistemi.entity.InvoiceSummary;
 
 @Repository
-public interface InvoicesSummaryRepository extends CrudRepository<InvoiceSummary, String> {
+public interface InvoicesSummaryRepository extends CrudRepository<InvoiceSummary, Integer> {
 	
 	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
 	

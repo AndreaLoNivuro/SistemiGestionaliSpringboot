@@ -32,7 +32,7 @@ public class InvoiceDetailService {
 
 		} catch (Exception e) {
 
-			response.setError("InvoiceDetail non creato");
+			response.setError("Invoice Detail non creato");
 
 		}
 
@@ -41,19 +41,19 @@ public class InvoiceDetailService {
 	}
 
 
-	public Response<String> deleteInvoiceDetail(InvoiceDetail invoiceDetail) {
+	public Response<String> deleteInvoiceDetail(int codInvoice) {
 
 		Response<String> response = new Response<String>();
 
 		try {
 
-			this.invoicesDetailRepository.delete(invoiceDetail);			
+			this.invoicesDetailRepository.deleteByCodInvoice(codInvoice);			
 
-			response.setResult("InvoiceDetail eliminato.");
+			response.setResult("Invoice Detail eliminato.");
 
 		} catch (Exception e) {
 
-			response.setError("InvoiceDetail non eliminato.");
+			response.setError("Invoice Detail non eliminato.");
 
 		}
 

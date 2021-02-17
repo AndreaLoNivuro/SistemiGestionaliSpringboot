@@ -9,8 +9,6 @@ import it.jac.sistemi.pk.PkInvoiceDetail;
 @Repository
 public interface InvoicesDetailRepository extends CrudRepository<InvoiceDetail, PkInvoiceDetail> {
 	
-	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
-	
-	//public void deleteByIdCandidate(int idCandidate);
+	public Void deleteByCodInvoice(int codInvoice);
 	
 }

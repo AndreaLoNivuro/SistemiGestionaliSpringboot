@@ -41,13 +41,13 @@ public class InvoiceSummaryService {
 	}
 
 
-	public Response<String> deleteInvoiceSummary(InvoiceSummary invoiceSummary) {
+	public Response<String> deleteInvoiceSummary(int codInvoice) {
 
 		Response<String> response = new Response<String>();
 
 		try {
 
-			this.invoicesSummaryRepository.delete(invoiceSummary);			
+			this.invoicesSummaryRepository.deleteById(codInvoice);;			
 
 			response.setResult("InvoiceSummary eliminato.");
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import it.jac.sistemi.entity.InvoiceMaster;
 
 @Repository
-public interface InvoicesMasterRepository extends CrudRepository<InvoiceMaster, String> {
+public interface InvoicesMasterRepository extends CrudRepository<InvoiceMaster, Integer> {
 	
 	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
 	

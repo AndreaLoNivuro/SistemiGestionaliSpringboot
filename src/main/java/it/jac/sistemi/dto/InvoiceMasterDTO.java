@@ -10,7 +10,9 @@ import lombok.Data;
 @Data
 public class InvoiceMasterDTO {
 
-	private String codInvoice;
+	private int codInvoice;
+	
+	private String invoiceNumber;
 
 	private String client;
 	

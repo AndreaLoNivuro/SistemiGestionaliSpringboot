@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class InvoiceSummaryDTO {
 
-	private String codInvoice;
+	private int codInvoice;
 
 	private float totalAmount;
 	

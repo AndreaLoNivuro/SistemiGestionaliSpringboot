@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,8 +19,12 @@ import lombok.Data;
 public class InvoiceMaster {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_invoice")
-	private String codInvoice;
+	private int codInvoice;
+	
+	@Column(name = "invoice_number")
+	private String invoiceNumber;
 	
 	@Column(name = "client")
 	private String client;

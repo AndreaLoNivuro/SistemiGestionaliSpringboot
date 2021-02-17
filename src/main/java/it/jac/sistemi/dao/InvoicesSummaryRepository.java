@@ -4,10 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import it.jac.sistemi.entity.InvoiceSummary;
-import it.jac.sistemi.pk.PkInvoiceSummary;
 
 @Repository
-public interface InvoicesSummaryRepository extends CrudRepository<InvoiceSummary, PkInvoiceSummary> {
+public interface InvoicesSummaryRepository extends CrudRepository<InvoiceSummary, String> {
 	
 	//public List<CandidateAnswer> findByIdCandidate(int idCandidate);
 	

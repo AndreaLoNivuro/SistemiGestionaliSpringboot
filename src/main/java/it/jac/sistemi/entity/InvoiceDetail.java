@@ -21,13 +21,12 @@ public  class InvoiceDetail {
 
 	@Id
 	@Column(name = "cod_invoice")
-	private String codInvoice;
+	private int codInvoice;
 	
 	@Id
 	@Column(name = "line")
 	private int line;
 
-	@Id
 	@Column(name = "cod_item")
 	private String codItem;
 	
@@ -61,6 +60,9 @@ public  class InvoiceDetail {
 	
 	@Column(name = "cod_vat")
 	private String codVat;
+	
+	@Column(name = "total_vat")
+	private float totalVat;
 	
 	@Column(name = "total_line")
 	private float totalLine;

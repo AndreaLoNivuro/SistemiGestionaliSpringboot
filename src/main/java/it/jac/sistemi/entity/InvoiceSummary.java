@@ -6,12 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import it.jac.sistemi.pk.PkInvoiceSummary;
 import lombok.Data;
 
 @Entity
 @Table(name = "invoices_summary")
-@IdClass(PkInvoiceSummary.class)
 @Data
 public  class InvoiceSummary {
 
@@ -19,7 +17,6 @@ public  class InvoiceSummary {
 	@Column(name = "cod_invoice")
 	private String codInvoice;
 
-	@Id
 	@Column(name = "total_amount")
 	private float totalAmount;
 	//netto

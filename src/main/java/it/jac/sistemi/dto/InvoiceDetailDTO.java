@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class InvoiceDetailDTO {
 
-	private String codInvoice;
+	private int codInvoice;
 
 	private int line;
 
@@ -34,6 +34,8 @@ public class InvoiceDetailDTO {
 	private float taxable;
 
 	private String codVat;
+	
+	private float totalVat;
 
 	private float totalLine;
 

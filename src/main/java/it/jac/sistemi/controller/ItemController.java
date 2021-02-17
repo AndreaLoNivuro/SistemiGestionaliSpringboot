@@ -25,7 +25,7 @@ public class ItemController {
 	@GetMapping(path="/findAll")
 	public Response<?> findAllItems() {
 		
-		log.info("Richiesta di find all Item.");
+		log.info("Richiesta di find all Items.");
 		
 		return itemService.findAllItems();
 		

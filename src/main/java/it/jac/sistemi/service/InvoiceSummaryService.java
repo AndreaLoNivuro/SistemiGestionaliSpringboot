@@ -32,7 +32,7 @@ public class InvoiceSummaryService {
 
 		} catch (Exception e) {
 
-			response.setError("InvoiceSummary non creato");
+			response.setError("Invoice Summary non creato");
 
 		}
 
@@ -41,7 +41,7 @@ public class InvoiceSummaryService {
 	}
 
 
-	public Response<String> deleteInvoiceSummary(int codInvoice) {
+	public Response<String> deleteInvoiceSummaryByCodInvoice(int codInvoice) {
 
 		Response<String> response = new Response<String>();
 
@@ -49,11 +49,31 @@ public class InvoiceSummaryService {
 
 			this.invoicesSummaryRepository.deleteById(codInvoice);;			
 
-			response.setResult("InvoiceSummary eliminato.");
+			response.setResult("Invoice Summary eliminato perchè eliminata fattura.");
 
 		} catch (Exception e) {
 
-			response.setError("InvoiceSummary non eliminato.");
+			response.setError("Invoice Summary non eliminato.");
+
+		}
+
+		return response;
+
+	}
+	
+	public Response<String> deleteInvoiceSummary(InvoiceSummary invoiceSummary) {
+
+		Response<String> response = new Response<String>();
+
+		try {
+
+			this.invoicesSummaryRepository.delete(invoiceSummary);		
+
+			response.setResult("Invoice Summary eliminato.");
+
+		} catch (Exception e) {
+
+			response.setError("Invoice Summary non eliminato.");
 
 		}
 

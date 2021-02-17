@@ -27,7 +27,7 @@ public class CategoryController {
 			@RequestBody Category category
 			) {
 		
-		log.info("richiesta di create.");
+		log.info("Richiesta di create Category.");
 
 		return categoryService.createCategory(category);
 
@@ -36,7 +36,7 @@ public class CategoryController {
 	@GetMapping(path="/findAll")
 	public Response<?> findAllCategories() {
 		
-		log.info("richiesta di find all.");
+		log.info("Richiesta di find all Categories.");
 		
 		return categoryService.findAllCategories();
 		
@@ -47,7 +47,7 @@ public class CategoryController {
 			@RequestBody Category category
 			) {
 
-		log.info("Richiesta di delete.");
+		log.info("Richiesta di delete Category.");
 
 		return categoryService.deleteCategory(category);
 		

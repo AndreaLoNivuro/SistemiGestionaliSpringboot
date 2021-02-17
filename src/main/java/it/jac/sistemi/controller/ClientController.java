@@ -27,7 +27,7 @@ public class ClientController {
 			@RequestBody Client client
 			) {
 		
-		log.info("richiesta di create.");
+		log.info("Richiesta di create Client.");
 
 		return clientService.createClient(client);
 
@@ -36,7 +36,7 @@ public class ClientController {
 	@GetMapping(path="/findAll")
 	public Response<?> findAllClients() {
 		
-		log.info("richiesta di find all.");
+		log.info("Richiesta di find all Clients.");
 		
 		return clientService.findAllClients();
 		
@@ -47,7 +47,7 @@ public class ClientController {
 			@RequestBody Client client
 			) {
 
-		log.info("Richiesta di delete.");
+		log.info("Richiesta di delete Client.");
 
 		return clientService.deleteClient(client);
 		

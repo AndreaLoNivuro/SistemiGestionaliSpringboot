@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.jac.sistemi.dto.Response;
-import it.jac.sistemi.entity.Client;
 import it.jac.sistemi.entity.InvoiceMaster;
 import it.jac.sistemi.service.InvoiceMasterService;
 
@@ -24,20 +23,20 @@ public class InvoiceMasterController {
 	private InvoiceMasterService invoiceMasterService;
 	
 	@PostMapping("/create")
-	public Response<?> createClient(
+	public Response<?> createInvoiceMaster(
 			@RequestBody InvoiceMaster invoiceMaster
 			) {
 		
-		log.info("richiesta di create Invoice Master.");
+		log.info("Richiesta di create Invoice Master.");
 
 		return invoiceMasterService.createInvoiceMaster(invoiceMaster);
 
 	}
 	
 	@GetMapping(path="/findAll")
-	public Response<?> findAllClients() {
+	public Response<?> findAllInvoicesMaster() {
 		
-		log.info("richiesta di find all Invoice Master.");
+		log.info("Richiesta di find all Invoice Master.");
 		
 		return invoiceMasterService.findAllInvoicesMaster();
 		

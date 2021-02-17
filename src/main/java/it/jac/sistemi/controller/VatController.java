@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.jac.sistemi.dto.Response;
-import it.jac.sistemi.entity.Item;
 import it.jac.sistemi.entity.Vat;
 import it.jac.sistemi.service.VatService;
 
@@ -28,7 +27,7 @@ public class VatController {
 			@RequestBody Vat vat
 			) {
 		
-		log.info("richiesta di create.");
+		log.info("Richiesta di create Vat.");
 
 		return vatService.createVat(vat);
 
@@ -37,7 +36,7 @@ public class VatController {
 	@GetMapping(path="/findAll")
 	public Response<?> findAllVats() {
 		
-		log.info("richiesta di find all.");
+		log.info("Richiesta di find all Vats.");
 		
 		return vatService.findAllVat();
 		
@@ -48,7 +47,7 @@ public class VatController {
 			@RequestBody Vat vat
 			) {
 
-		log.info("Richiesta di delete.");
+		log.info("Richiesta di delete Vat.");
 
 		return vatService.deleteVat(vat);
 		

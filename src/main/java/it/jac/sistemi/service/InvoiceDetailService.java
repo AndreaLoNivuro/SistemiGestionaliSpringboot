@@ -41,13 +41,33 @@ public class InvoiceDetailService {
 	}
 
 
-	public Response<String> deleteInvoiceDetail(int codInvoice) {
+	public Response<String> deleteInvoiceDetailByCodInvoice(int codInvoice) {
 
 		Response<String> response = new Response<String>();
 
 		try {
 
 			this.invoicesDetailRepository.deleteByCodInvoice(codInvoice);			
+
+			response.setResult("Invoice Detail eliminato perchè eliminata fattura.");
+
+		} catch (Exception e) {
+
+			response.setError("Invoice Detail non eliminato.");
+
+		}
+
+		return response;
+
+	}
+	
+	public Response<String> deleteInvoiceDetail(InvoiceDetail invoiceDetail) {
+
+		Response<String> response = new Response<String>();
+
+		try {
+
+			this.invoicesDetailRepository.delete(invoiceDetail);			
 
 			response.setResult("Invoice Detail eliminato.");
 

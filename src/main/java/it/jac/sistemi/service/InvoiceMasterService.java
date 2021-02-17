@@ -55,9 +55,9 @@ public class InvoiceMasterService {
 
 			this.invoicesMasterRepository.delete(invoiceMaster);
 			
-			this.invoiceDetailService.deleteInvoiceDetail(invoiceMaster.getCodInvoice());
+			this.invoiceDetailService.deleteInvoiceDetailByCodInvoice(invoiceMaster.getCodInvoice());
 			
-			this.invoiceSummaryService.deleteInvoiceSummary(invoiceMaster.getCodInvoice());
+			this.invoiceSummaryService.deleteInvoiceSummaryByCodInvoice(invoiceMaster.getCodInvoice());
 
 			response.setResult("Invoice eliminata.");
 

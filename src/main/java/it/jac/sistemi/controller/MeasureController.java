@@ -27,7 +27,7 @@ public class MeasureController {
 			@RequestBody Measure measure
 			) {
 		
-		log.info("richiesta di create.");
+		log.info("Richiesta di create Measure.");
 
 		return measureService.createMeasure(measure);
 
@@ -36,7 +36,7 @@ public class MeasureController {
 	@GetMapping(path="/findAll")
 	public Response<?> findAllMeasures() {
 		
-		log.info("richiesta di find all.");
+		log.info("Richiesta di find all Measures.");
 		
 		return measureService.findAllMeasures();
 		
@@ -47,7 +47,7 @@ public class MeasureController {
 			@RequestBody Measure measure
 			) {
 
-		log.info("Richiesta di delete.");
+		log.info("Richiesta di delete Measure.");
 
 		return measureService.deleteMeasure(measure);
 		

@@ -29,10 +29,14 @@ public class ClientService {
 		try {
 
 			response.setResult(this.clientsRepository.save(client));
+			
+			log.info("Client creato/modificato.");
 
 		} catch (Exception e) {
 
 			response.setError("Client non creato");
+			
+			log.info("Client non creato/modificato.");
 
 		}
 
@@ -50,10 +54,14 @@ public class ClientService {
 			this.clientsRepository.delete(client);			
 
 			response.setResult("Client eliminato.");
+			
+			log.info("Client eliminato.");
 
 		} catch (Exception e) {
 
 			response.setError("Client non eliminato.");
+			
+			log.info("Client non eliminato.");
 
 		}
 
@@ -80,10 +88,14 @@ public class ClientService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Clients.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Clients non trovati.");
 
 		}
 

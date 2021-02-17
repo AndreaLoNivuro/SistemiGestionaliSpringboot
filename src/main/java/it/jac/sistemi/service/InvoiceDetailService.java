@@ -29,10 +29,14 @@ public class InvoiceDetailService {
 		try {
 
 			response.setResult(this.invoicesDetailRepository.save(invoiceDetail));
+			
+			log.info("Invoice Detail creato/modificato.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice Detail non creato");
+			
+			log.info("Invoice Detail non creato/modificato.");
 
 		}
 
@@ -70,10 +74,14 @@ public class InvoiceDetailService {
 			this.invoicesDetailRepository.delete(invoiceDetail);			
 
 			response.setResult("Invoice Detail eliminato.");
+			
+			log.info("Invoice Detail eliminato.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice Detail non eliminato.");
+			
+			log.info("Invoice Detail non eliminato.");
 
 		}
 
@@ -100,10 +108,14 @@ public class InvoiceDetailService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Invoices Detail.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Invoices Detail non trovati.");
 
 		}
 

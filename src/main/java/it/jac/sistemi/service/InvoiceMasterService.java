@@ -35,10 +35,47 @@ public class InvoiceMasterService {
 		try {
 
 			response.setResult(this.invoicesMasterRepository.save(invoiceMaster));
+			
+			log.info("Invoice Master creata/modificata.");
 
 		} catch (Exception e) {
 
 			response.setError("InvoiceMaster non creato");
+			
+			log.info("Invoice Master non creata/modificata.");
+
+		}
+
+		return response;
+
+	}
+
+	public Response<List<InvoiceMasterDTO>> findAllInvoicesMaster() {
+
+		Response<List<InvoiceMasterDTO>> response = new Response<List<InvoiceMasterDTO>>();
+
+		List<InvoiceMasterDTO> result = new ArrayList<>();
+
+		try {
+
+			Iterator<InvoiceMaster> iterator = this.invoicesMasterRepository.findAll().iterator();
+
+			while(iterator.hasNext()) {
+
+				InvoiceMaster invoiceMaster = iterator.next();
+				result.add(InvoiceMasterDTO.build(invoiceMaster));
+
+			}
+
+			response.setResult(result);
+			
+			log.info("Lista Invoices Master.");
+
+		} catch (Exception e) {
+
+			response.setError("Nessun elemento trovato.");
+			
+			log.info("Invoices Master non trovate.");
 
 		}
 
@@ -60,10 +97,14 @@ public class InvoiceMasterService {
 			this.invoiceSummaryService.deleteInvoiceSummaryByCodInvoice(invoiceMaster.getCodInvoice());
 
 			response.setResult("Invoice eliminata.");
+			
+			log.info("Invoice eliminata.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice non eliminata.");
+			
+			log.info("Invoice non eliminata.");
 
 		}
 
@@ -71,34 +112,5 @@ public class InvoiceMasterService {
 
 	}
 
-
-	public Response<List<InvoiceMasterDTO>> findAllInvoicesMaster() {
-
-		Response<List<InvoiceMasterDTO>> response = new Response<List<InvoiceMasterDTO>>();
-
-		List<InvoiceMasterDTO> result = new ArrayList<>();
-
-		try {
-
-			Iterator<InvoiceMaster> iterator = this.invoicesMasterRepository.findAll().iterator();
-
-			while(iterator.hasNext()) {
-
-				InvoiceMaster invoiceMaster = iterator.next();
-				result.add(InvoiceMasterDTO.build(invoiceMaster));
-
-			}
-
-			response.setResult(result);
-
-		} catch (Exception e) {
-
-			response.setError("Nessun elemento trovato.");
-
-		}
-
-		return response;
-
-	}
 
 }

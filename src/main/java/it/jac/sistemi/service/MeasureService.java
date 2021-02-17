@@ -29,10 +29,14 @@ public class MeasureService {
 		try {
 
 			response.setResult(this.measuresRepository.save(measure));
+			
+			log.info("Measure creata/modificata.");
 
 		} catch (Exception e) {
 
 			response.setError("Measure non creato");
+			
+			log.info("Measure non creata/modificata.");
 
 		}
 
@@ -50,10 +54,14 @@ public class MeasureService {
 			this.measuresRepository.delete(measure);			
 
 			response.setResult("Measure eliminato.");
+			
+			log.info("Measure eliminata.");
 
 		} catch (Exception e) {
 
 			response.setError("Measure non eliminato.");
+			
+			log.info("Measure non eliminata.");
 
 		}
 
@@ -80,10 +88,14 @@ public class MeasureService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Measures.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Measures non trovate.");
 
 		}
 

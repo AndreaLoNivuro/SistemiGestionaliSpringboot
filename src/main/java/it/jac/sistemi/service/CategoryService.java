@@ -29,10 +29,14 @@ public class CategoryService {
 		try {
 
 			response.setResult(this.categoriesRepository.save(category));
+			
+			log.info("Category creata/modificata.");
 
 		} catch (Exception e) {
 
 			response.setError("Category non creata");
+			
+			log.info("Category non creata/modificata.");
 
 		}
 
@@ -50,11 +54,15 @@ public class CategoryService {
 			this.categoriesRepository.delete(category);			
 
 			response.setResult("Category eliminata.");
+			
+			log.info("Category eliminata.");
 
 		} catch (Exception e) {
 
 			response.setError("Category non eliminata.");
 
+			log.info("Category non eliminata.");
+			
 		}
 
 		return response;
@@ -80,10 +88,14 @@ public class CategoryService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Categories.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Categories non trovate.");
 
 		}
 

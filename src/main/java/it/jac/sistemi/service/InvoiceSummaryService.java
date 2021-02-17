@@ -29,10 +29,14 @@ public class InvoiceSummaryService {
 		try {
 
 			response.setResult(this.invoicesSummaryRepository.save(invoiceSummary));
+			
+			log.info("Invoice Summary creato/modificato.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice Summary non creato");
+			
+			log.info("Invoice Summary non creato/modificato.");
 
 		}
 
@@ -70,10 +74,14 @@ public class InvoiceSummaryService {
 			this.invoicesSummaryRepository.delete(invoiceSummary);		
 
 			response.setResult("Invoice Summary eliminato.");
+			
+			log.info("Invoice Summary eliminato.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice Summary non eliminato.");
+			
+			log.info("Invoice Summary non eliminato.");
 
 		}
 
@@ -100,10 +108,14 @@ public class InvoiceSummaryService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Invoices Summary.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Invoices Summary non trovati.");
 
 		}
 

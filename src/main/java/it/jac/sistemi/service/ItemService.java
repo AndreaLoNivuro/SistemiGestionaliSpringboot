@@ -30,10 +30,14 @@ public class ItemService {
 		try {
 
 			response.setResult(this.itemsRepository.save(item));
+			
+			log.info("Item creato/modificato.");
 
 		} catch (Exception e) {
 
 			response.setError("Item non creato");
+			
+			log.info("Item non creato/modificato.");
 
 		}
 
@@ -46,41 +50,19 @@ public class ItemService {
 
 		Response<String> response = new Response<String>();
 		
-		/*List<CandidateAnswer> candidateAnswers = new ArrayList<CandidateAnswer>();
-		
-		List<CandidateSkill> candidateSkills = new ArrayList<CandidateSkill>();*/
-
 		try {
 
-			/*candidateAnswers = this.candidateAnswerRepository.findByIdCandidate(id);
-			if (candidateAnswers != null) {
-				
-				for (CandidateAnswer ca: candidateAnswers) {
-					
-					this.candidateAnswerRepository.delete(ca);
-					
-				}
-				
-			}
-			
-			candidateSkills = this.candidateSkillRepository.findByIdCandidate(id);
-			if (candidateSkills != null) {
-				
-				for (CandidateSkill cs: candidateSkills) {
-					
-					this.candidateSkillRepository.delete(cs);
-					
-				}
-				
-			}*/
-			
 			this.itemsRepository.delete(item);			
 
 			response.setResult("Item eliminato.");
+			
+			log.info("Item eliminato.");
 
 		} catch (Exception e) {
 
 			response.setError("Item non eliminato.");
+			
+			log.info("Item non eliminato.");
 
 		}
 
@@ -107,10 +89,14 @@ public class ItemService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Items.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Items non trovati.");
 
 		}
 

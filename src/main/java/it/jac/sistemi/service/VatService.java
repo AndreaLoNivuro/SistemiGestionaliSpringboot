@@ -29,10 +29,14 @@ public class VatService {
 		try {
 
 			response.setResult(this.vatRepository.save(vat));
+			
+			log.info("Vat creata/modificata.");
 
 		} catch (Exception e) {
 
 			response.setError("Vat non creato");
+			
+			log.info("Vat non creata/modificata.");
 
 		}
 
@@ -49,11 +53,15 @@ public class VatService {
 
 			this.vatRepository.delete(vat);			
 
-			response.setResult("Vat eliminato.");
+			response.setResult("Vat eliminata.");
+			
+			log.info("Vat eliminata.");
 
 		} catch (Exception e) {
 
-			response.setError("Vat non eliminato.");
+			response.setError("Vat non eliminata.");
+			
+			log.info("Vat non eliminata.");
 
 		}
 
@@ -80,10 +88,14 @@ public class VatService {
 			}
 
 			response.setResult(result);
+			
+			log.info("Lista Vats.");
 
 		} catch (Exception e) {
 
 			response.setError("Nessun elemento trovato.");
+			
+			log.info("Vats non trovate.");
 
 		}
 

@@ -14,7 +14,7 @@ public  class InvoiceSummary {
 
 	@Id
 	@Column(name = "cod_invoice")
-	private String codInvoice;
+	private int codInvoice;
 
 	@Column(name = "total_amount")
 	private float totalAmount;

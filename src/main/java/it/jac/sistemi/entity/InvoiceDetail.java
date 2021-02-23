@@ -69,7 +69,7 @@ public  class InvoiceDetail {
 
 	@Override
 	public String toString() {
-		return "Invoice detail [cod invoice = " + codInvoice + ", cod item = " + codItem + ", lot = " + lot + "]";
+		return "Invoice detail [cod invoice = " + codInvoice + ", cod item = " + codItem + ", unit price = " + unitPrice + "]";
 	}
 	
 }

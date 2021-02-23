@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.jac.sistemi.dto.Response;
+import it.jac.sistemi.entity.InvoiceDetail;
 import it.jac.sistemi.service.InvoiceService;
 
 @RestController
@@ -28,6 +29,28 @@ public class InvoiceController {
 		log.info("Richiesta di delete Invoice.");
 
 		return invoiceService.deleteInvoice(codInvoice);
+		
+	}
+	
+	@PostMapping(path = "/provisionalCalcDetail")
+	public Response<?> calculateInvoiceDetail(
+			@RequestBody InvoiceDetail invoiceDetail
+			) {
+
+		log.info("Richiesta di delete Invoice Detail.");
+
+		return invoiceService.lineCalculations(invoiceDetail);
+		
+	}
+	
+	@PostMapping(path = "/provisionalCalcSummary")
+	public Response<?> calculateInvoiceSummary(
+			@RequestBody int codInvoice
+			) {
+
+		log.info("Richiesta di delete Invoice Detail.");
+
+		return invoiceService.summaryCalculations(codInvoice);
 		
 	}
 

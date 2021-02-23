@@ -1,5 +1,7 @@
 package it.jac.sistemi.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,26 @@ public class InvoiceDetailController {
 	@Autowired
 	private InvoiceDetailService invoiceDetailService;
 	
+//	@PostMapping("/create")
+//	public Response<?> createInvoiceDetail(
+//			@RequestBody List<InvoiceDetail> invoiceDetailList,
+//			@RequestBody int codInvoice
+//			) {
+//		
+//		log.info("Richiesta di create Invoice Detail.");
+//
+//		return invoiceDetailService.createInvoiceDetail(invoiceDetailList, codInvoice);
+//
+//	}
+	
 	@PostMapping("/create")
 	public Response<?> createInvoiceDetail(
-			@RequestBody InvoiceDetail invoiceDetail
+			@RequestBody List<InvoiceDetail> invoiceDetailList
 			) {
 		
 		log.info("Richiesta di create Invoice Detail.");
 
-		return invoiceDetailService.createInvoiceDetail(invoiceDetail);
+		return invoiceDetailService.createInvoiceDetail(invoiceDetailList);
 
 	}
 	

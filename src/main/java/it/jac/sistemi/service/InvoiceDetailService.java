@@ -22,13 +22,20 @@ public class InvoiceDetailService {
 	@Autowired
 	private InvoicesDetailRepository invoicesDetailRepository;
 
-	public Response<InvoiceDetail> createInvoiceDetail(InvoiceDetail invoiceDetail) {
+	public Response<List<InvoiceDetail>> createInvoiceDetail(List<InvoiceDetail> invoiceDetailList) {
 
-		Response<InvoiceDetail> response = new Response<InvoiceDetail>();
+		Response<List<InvoiceDetail>> response = new Response<List<InvoiceDetail>>();
 
+		List<InvoiceDetail> invoiceDetailSaved = new ArrayList<InvoiceDetail>();
+		
 		try {
-
-			response.setResult(this.invoicesDetailRepository.save(invoiceDetail));
+			
+			for (InvoiceDetail invoiceDetail : invoiceDetailList) {
+				invoiceDetail.setLine(invoiceDetailList.hashCode());
+				invoiceDetailSaved.add(this.invoicesDetailRepository.save(invoiceDetail));
+			}
+			
+			response.setResult(invoiceDetailSaved);
 			
 			log.info("Invoice Detail creato/modificato.");
 

@@ -1,6 +1,5 @@
 package it.jac.sistemi.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,13 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.jac.sistemi.dao.InvoicesDetailRepository;
-import it.jac.sistemi.dao.InvoicesMasterRepository;
-import it.jac.sistemi.dao.InvoicesSummaryRepository;
 import it.jac.sistemi.dao.ItemsRepository;
 import it.jac.sistemi.dao.VatRepository;
+import it.jac.sistemi.dto.InvoiceDTO;
 import it.jac.sistemi.dto.Response;
 import it.jac.sistemi.entity.InvoiceDetail;
+import it.jac.sistemi.entity.InvoiceMaster;
 import it.jac.sistemi.entity.InvoiceSummary;
 import it.jac.sistemi.entity.Item;
 import it.jac.sistemi.entity.Vat;
@@ -25,13 +23,13 @@ public class InvoiceService {
 	private static Logger log = LoggerFactory.getLogger(InvoiceService.class);
 
 	@Autowired
-	private InvoicesMasterRepository invoicesMasterRepository;
-
+	private InvoiceMasterService invoiceMasterService;
+	
 	@Autowired
-	private InvoicesDetailRepository invoicesDetailRepository;
-
+	private InvoiceDetailService invoiceDetailService;
+	
 	@Autowired
-	private InvoicesSummaryRepository invoicesSummaryRepository;
+	private InvoiceSummaryService invoiceSummaryService;
 
 	@Autowired
 	private VatRepository vatRepository;
@@ -42,13 +40,11 @@ public class InvoiceService {
 	public Response<String> deleteInvoice(int codInvoice) {
 		Response<String> response = new Response<String>();
 
-		try {
-
-			this.invoicesMasterRepository.deleteById(codInvoice);
-
-			this.invoicesDetailRepository.deleteByCodInvoice(codInvoice);
-
-			this.invoicesSummaryRepository.deleteById(codInvoice);
+		try {	
+			
+			this.invoiceMasterService.deleteInvoiceMasterByCodInvoice(codInvoice);
+			this.invoiceDetailService.deleteInvoiceDetailByCodInvoice(codInvoice);
+			this.invoiceSummaryService.deleteInvoiceSummaryByCodInvoice(codInvoice);
 
 			response.setResult("Invoice eliminata.");
 
@@ -80,7 +76,7 @@ public class InvoiceService {
 			invoiceDetail.setUnitPrice(item.getPrice());
 
 			invoiceDetail.setTotalDiscount(
-					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())*invoiceDetail.getDiscount()/100
+					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())*Float.parseFloat(invoiceDetail.getDiscount())/100
 					);
 
 			invoiceDetail.setTaxable(
@@ -110,27 +106,96 @@ public class InvoiceService {
 		return response;
 	}
 
-	public Response<InvoiceSummary> summaryCalculations(int codInvoice) {
+	//	public Response<InvoiceDetail> lineCalculations(InvoiceDetail invoiceDetail) {
+	//
+	//		Response<InvoiceDetail> response = new Response<InvoiceDetail>();
+	//		
+	//		//List<String> discountList = new ArrayList<String>();
+	//		try {
+	//
+	//			Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
+	//			Vat vat = this.vatRepository.findById(item.getVat()).get();
+	//
+	//			invoiceDetail.setDescription(item.getDescription());
+	//			invoiceDetail.setMeasure(item.getMeasure());
+	//			invoiceDetail.setCodVat(item.getVat());
+	//			invoiceDetail.setUnitPrice(item.getPrice());
+	//			
+	//			log.info("1");
+	//			
+	//			float total = invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice();
+	//			float totalDiscount = 0;
+	//			
+	//			if (invoiceDetail.getDiscount() != "") {
+	//				log.info("2");
+	////				for (String string : invoiceDetail.getDiscount().trim().split("+")) {
+	////					discountList.add(string);
+	////				}
+	//				log.info(invoiceDetail.getDiscount());
+	//				log.info(invoiceDetail.getDiscount().replaceAll("\\s+", "").toString());
+	//				String discountString = invoiceDetail.getDiscount().replaceAll("\\s+", "");
+	//				
+	//				List<String> discountList = Splitter.on('+')
+	//						.trimResults()
+	//						.omitEmptyStrings()
+	//						.splitToList(discountString);
+	//				
+	//				//String[] discountList = discountString.split("+");
+	//				
+	//					log.info(discountList.toString());
+	//				for (String discount: discountList) {
+	//					totalDiscount += (total*Float.parseFloat(discount))/100;
+	//				}
+	//			}
+	//			log.info("3");
+	//			invoiceDetail.setTotalDiscount(totalDiscount);
+	//			log.info("4");
+	//
+	//			invoiceDetail.setTaxable(
+	//					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())-invoiceDetail.getTotalDiscount()
+	//					);
+	//			log.info("5");
+	//			invoiceDetail.setTotalVat(
+	//					(invoiceDetail.getTaxable()*vat.getVat())/100
+	//					);
+	//			log.info("6");
+	//			invoiceDetail.setTotalLine(
+	//					invoiceDetail.getTaxable()+invoiceDetail.getTotalVat()
+	//					);
+	//
+	//			response.setResult(invoiceDetail);
+	//
+	//			log.info("Calcoli Invoice Detail.");
+	//
+	//		} catch (Exception e) {
+	//
+	//			response.setError("Invoice non eliminata.");
+	//
+	//			log.info("Invoice non eliminata.");
+	//
+	//		}
+	//
+	//		return response;
+	//	}
+
+	public Response<InvoiceSummary> summaryCalculations(List<InvoiceDetail> invoiceDetailList) {
 
 		Response<InvoiceSummary> response = new Response<InvoiceSummary>();
 
-		List<InvoiceDetail> invoiceDetailList = new ArrayList<InvoiceDetail>();
-
 		InvoiceSummary invoiceSummary = new InvoiceSummary();
+
+		log.info("lista");
+		log.info(invoiceDetailList.toString());
 
 		float totalProducts = 0;
 		float totalServices = 0;
 		float tailDiscount = 0;
 		float totalTileDiscount = 0;
 		float totalLineDiscount = 0;
-		float totalDiscount = 0;
 		float taxable = 0;
 		float totalVat = 0;
-		float totalAmount = 0;
 
 		try {
-
-			invoiceDetailList = this.invoicesDetailRepository.findByCodInvoice(codInvoice);
 
 			for (InvoiceDetail invoiceDetail: invoiceDetailList) {
 				Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
@@ -144,11 +209,9 @@ public class InvoiceService {
 				totalLineDiscount += invoiceDetail.getTotalDiscount();
 				taxable += invoiceDetail.getTaxable();
 				totalVat += invoiceDetail.getTotalVat();
-				
 
 			}
 
-			invoiceSummary.setCodInvoice(codInvoice);
 			invoiceSummary.setTotalProducts(totalProducts);
 			invoiceSummary.setTotalServices(totalServices);
 			invoiceSummary.setTailDiscount(tailDiscount);
@@ -157,7 +220,9 @@ public class InvoiceService {
 			invoiceSummary.setTotalDiscount(totalTileDiscount + totalLineDiscount);
 			invoiceSummary.setTotalVat(totalVat);
 			invoiceSummary.setTaxable(taxable);
-			invoiceSummary.setTotalAmount(totalAmount);
+			invoiceSummary.setTotalAmount(taxable+totalVat);
+
+			log.info(invoiceSummary.toString());
 
 			response.setResult(invoiceSummary);
 
@@ -168,6 +233,42 @@ public class InvoiceService {
 			response.setError("Provisional Invoice non calcolato.");
 
 			log.info("Provisional Invoice Summary non calcolato.");
+
+		}
+
+		return response;
+	}
+
+	public Response<InvoiceDTO> createInvoice(InvoiceDTO invoiceDTO) {
+
+		Response<InvoiceDTO> response = new Response<InvoiceDTO>();
+
+		try {
+			
+			InvoiceMaster invoiceMasterCreated = this.invoiceMasterService.createInvoiceMaster(invoiceDTO.getInvoiceMaster()).getResult();
+			
+			List<InvoiceDetail> invoiceDetalListCreated = this.invoiceDetailService.createInvoiceDetail(invoiceDTO.getInvoiceDetailList(), invoiceMasterCreated.getCodInvoice()).getResult();
+			
+			InvoiceSummary invoiceSummaryCreated = this.invoiceSummaryService.createInvoiceSummary(invoiceDTO.getInvoiceSummary(), invoiceMasterCreated.getCodInvoice()).getResult();
+
+			InvoiceDTO invoiceDTOCreated = null;
+			invoiceDTOCreated.setInvoiceMaster(invoiceMasterCreated);
+			if (invoiceDetalListCreated != null) {
+				invoiceDTOCreated.setInvoiceDetailList(invoiceDetalListCreated);
+			}
+			if (invoiceSummaryCreated != null) {
+				invoiceDTOCreated.setInvoiceSummary(invoiceSummaryCreated);
+			}
+			
+			response.setResult(invoiceDTOCreated);
+
+			log.info("Invoice creata/modificata.");
+
+		} catch (Exception e) {
+
+			response.setError("Invoice non creata/modificata.");
+
+			log.info("Invoice non creata/modificata.");
 
 		}
 

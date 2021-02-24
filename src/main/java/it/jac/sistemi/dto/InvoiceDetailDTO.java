@@ -27,7 +27,7 @@ public class InvoiceDetailDTO {
 
 	private float unitPrice;
 
-	private float discount;
+	private String discount;
 
 	private float totalDiscount;
 

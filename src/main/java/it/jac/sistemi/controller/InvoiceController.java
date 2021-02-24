@@ -1,5 +1,7 @@
 package it.jac.sistemi.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.jac.sistemi.dto.InvoiceDTO;
 import it.jac.sistemi.dto.Response;
 import it.jac.sistemi.entity.InvoiceDetail;
 import it.jac.sistemi.service.InvoiceService;
@@ -16,10 +19,21 @@ import it.jac.sistemi.service.InvoiceService;
 @RequestMapping("/invoice")
 public class InvoiceController {
 	
-	private static Logger log = LoggerFactory.getLogger(InvoiceMasterController.class);
+	private static Logger log = LoggerFactory.getLogger(InvoiceController.class);
 
 	@Autowired
 	private InvoiceService invoiceService;
+	
+	@PostMapping(path = "/create")
+	public Response<?> createInvoice(
+			@RequestBody InvoiceDTO invoiceDTO
+			) {
+
+		log.info("Richiesta di create Invoice.");
+
+		return invoiceService.createInvoice(invoiceDTO);
+		
+	}
 	
 	@PostMapping(path = "/delete")
 	public Response<?> deleteInvoice(
@@ -45,12 +59,12 @@ public class InvoiceController {
 	
 	@PostMapping(path = "/provisionalCalcSummary")
 	public Response<?> calculateInvoiceSummary(
-			@RequestBody int codInvoice
+			@RequestBody List<InvoiceDetail> invoiceDetailList
 			) {
 
 		log.info("Richiesta di delete Invoice Detail.");
 
-		return invoiceService.summaryCalculations(codInvoice);
+		return invoiceService.summaryCalculations(invoiceDetailList);
 		
 	}
 

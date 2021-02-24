@@ -22,7 +22,7 @@ public class InvoiceDetailService {
 	@Autowired
 	private InvoicesDetailRepository invoicesDetailRepository;
 
-	public Response<List<InvoiceDetail>> createInvoiceDetail(List<InvoiceDetail> invoiceDetailList) {
+	public Response<List<InvoiceDetail>> createInvoiceDetail(List<InvoiceDetail> invoiceDetailList, int codInvoice) {
 
 		Response<List<InvoiceDetail>> response = new Response<List<InvoiceDetail>>();
 
@@ -31,6 +31,7 @@ public class InvoiceDetailService {
 		try {
 			
 			for (InvoiceDetail invoiceDetail : invoiceDetailList) {
+				invoiceDetail.setCodInvoice(codInvoice);
 				invoiceDetail.setLine(invoiceDetailList.hashCode());
 				invoiceDetailSaved.add(this.invoicesDetailRepository.save(invoiceDetail));
 			}
@@ -57,10 +58,16 @@ public class InvoiceDetailService {
 		Response<String> response = new Response<String>();
 
 		try {
+			
+			if (this.invoicesDetailRepository.findByCodInvoice(codInvoice)!= null) {
+				for (InvoiceDetail invoiceDetail: this.invoicesDetailRepository.findByCodInvoice(codInvoice)) {
+					this.invoicesDetailRepository.delete(invoiceDetail);
+				}
+			} else {
+				log.info("Nessuna riga.");
+			}	
 
-			this.invoicesDetailRepository.deleteByCodInvoice(codInvoice);			
-
-			response.setResult("Invoice Detail eliminato perchè eliminata fattura.");
+			response.setResult("Invoice Detail eliminato.");
 
 		} catch (Exception e) {
 

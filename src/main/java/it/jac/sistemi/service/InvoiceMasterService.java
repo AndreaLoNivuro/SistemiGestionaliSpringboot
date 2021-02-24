@@ -21,12 +21,6 @@ public class InvoiceMasterService {
 
 	@Autowired
 	private InvoicesMasterRepository invoicesMasterRepository;
-	
-	@Autowired
-	private InvoiceDetailService invoiceDetailService;
-	
-	@Autowired
-	private InvoiceSummaryService invoiceSummaryService;
 
 	public Response<InvoiceMaster> createInvoiceMaster(InvoiceMaster invoiceMaster) {
 
@@ -84,21 +78,17 @@ public class InvoiceMasterService {
 	}
 
 
-	public Response<String> deleteInvoiceMaster(InvoiceMaster invoiceMaster) {
+	public Response<String> deleteInvoiceMasterByCodInvoice(int codInvoice) {
 
 		Response<String> response = new Response<String>();
 
 		try {
 
-			this.invoicesMasterRepository.delete(invoiceMaster);
-			
-			this.invoiceDetailService.deleteInvoiceDetailByCodInvoice(invoiceMaster.getCodInvoice());
-			
-			this.invoiceSummaryService.deleteInvoiceSummaryByCodInvoice(invoiceMaster.getCodInvoice());
+			this.invoicesMasterRepository.deleteById(codInvoice);
 
-			response.setResult("Invoice eliminata.");
+			response.setResult("Invoice Master eliminata.");
 			
-			log.info("Invoice eliminata.");
+			log.info("Invoice Master eliminata.");
 
 		} catch (Exception e) {
 

@@ -22,11 +22,13 @@ public class InvoiceSummaryService {
 	@Autowired
 	private InvoicesSummaryRepository invoicesSummaryRepository;
 
-	public Response<InvoiceSummary> createInvoiceSummary(InvoiceSummary invoiceSummary) {
+	public Response<InvoiceSummary> createInvoiceSummary(InvoiceSummary invoiceSummary, int codInvoice) {
 
 		Response<InvoiceSummary> response = new Response<InvoiceSummary>();
 
 		try {
+			
+			invoiceSummary.setCodInvoice(codInvoice);
 
 			response.setResult(this.invoicesSummaryRepository.save(invoiceSummary));
 			
@@ -51,9 +53,9 @@ public class InvoiceSummaryService {
 
 		try {
 
-			this.invoicesSummaryRepository.deleteById(codInvoice);;			
+			this.invoicesSummaryRepository.deleteById(codInvoice);
 
-			response.setResult("Invoice Summary eliminato perchè eliminata fattura.");
+			response.setResult("Invoice Summary eliminato.");
 
 		} catch (Exception e) {
 

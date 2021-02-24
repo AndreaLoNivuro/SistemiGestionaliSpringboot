@@ -50,7 +50,7 @@ public  class InvoiceDetail {
 	private float unitPrice;
 	
 	@Column(name = "discount")
-	private float discount;
+	private String discount;
 	
 	@Column(name = "total_discount")
 	private float totalDiscount;

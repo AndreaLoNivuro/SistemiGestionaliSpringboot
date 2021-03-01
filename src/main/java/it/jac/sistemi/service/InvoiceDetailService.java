@@ -30,6 +30,8 @@ public class InvoiceDetailService {
 		
 		try {
 			
+			deleteInvoiceDetailByCodInvoice(codInvoice);
+			
 			for (InvoiceDetail invoiceDetail : invoiceDetailList) {
 				invoiceDetail.setCodInvoice(codInvoice);
 				invoiceDetail.setLine(invoiceDetailList.hashCode());

@@ -27,6 +27,8 @@ public class InvoiceMasterService {
 		Response<InvoiceMaster> response = new Response<InvoiceMaster>();
 
 		try {
+			
+			log.info(invoiceMaster.toString());
 
 			response.setResult(this.invoicesMasterRepository.save(invoiceMaster));
 			

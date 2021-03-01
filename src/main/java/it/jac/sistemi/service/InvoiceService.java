@@ -238,6 +238,72 @@ public class InvoiceService {
 
 		return response;
 	}
+	
+	public Response<InvoiceDTO> tailDiscountCalculations(InvoiceDTO invoiceDTO) {
+
+		Response<InvoiceDTO> response = new Response<InvoiceDTO>();
+
+		log.info("tail discount");
+
+		float totalTileDiscount = 0;
+		float taxable = 0;
+		float totalVat = 0;
+		float totalAmount = 0;
+
+		try {
+
+			for (InvoiceDetail invoiceDetail: invoiceDTO.getInvoiceDetailList()) {
+				
+				Vat vat = this.vatRepository.findById(invoiceDetail.getCodVat()).get();
+				
+				//calcolo total line discount summary
+				//totalLineDiscount += invoiceDetail.getTotalDiscount();
+				
+				//calcolo tail discount riga
+				float tailDiscount = invoiceDetail.getTaxable()*invoiceDTO.getInvoiceSummary().getTailDiscount()/100;
+				//calcolo total discount riga
+				invoiceDetail.setTotalDiscount(invoiceDetail.getTotalDiscount()+tailDiscount);
+				//calcolo total tail discount summary
+				totalTileDiscount += tailDiscount;
+				
+				//calcolo taxable riga 
+				invoiceDetail.setTaxable(invoiceDetail.getTaxable() - tailDiscount);
+				//calcolo total taxable summary
+				taxable += invoiceDetail.getTaxable();
+				
+				//calcolo total vat riga
+				invoiceDetail.setTotalVat((invoiceDetail.getTaxable()*vat.getVat())/100);
+				//calcolo total vat summary
+				totalVat += invoiceDetail.getTotalVat();
+				
+				//calcolo total riga
+				invoiceDetail.setTotalLine(invoiceDetail.getTaxable()+invoiceDetail.getTotalVat());
+				//calcolo total amount summary
+				totalAmount += invoiceDetail.getTotalLine();
+
+			}
+
+			//set nuovi valori in summary
+			invoiceDTO.getInvoiceSummary().setTotalTileDiscount(totalTileDiscount);
+			invoiceDTO.getInvoiceSummary().setTotalDiscount(invoiceDTO.getInvoiceSummary().getTotalDiscount()+totalTileDiscount);
+			invoiceDTO.getInvoiceSummary().setTaxable(taxable);
+			invoiceDTO.getInvoiceSummary().setTotalVat(totalVat);
+			invoiceDTO.getInvoiceSummary().setTotalAmount(totalAmount);
+			
+			response.setResult(invoiceDTO);
+
+			log.info("Provisional tail discount calcolato.");
+
+		} catch (Exception e) {
+
+			response.setError("Provisional tail discount non calcolato.");
+
+			log.info("Provisional tail discount non calcolato.");
+
+		}
+
+		return response;
+	}
 
 	public Response<InvoiceDTO> createInvoice(InvoiceDTO invoiceDTO) {
 

@@ -62,9 +62,20 @@ public class InvoiceController {
 			@RequestBody List<InvoiceDetail> invoiceDetailList
 			) {
 
-		log.info("Richiesta di delete Invoice Detail.");
+		log.info("Richiesta di calculate provisional Invoice Summary.");
 
 		return invoiceService.summaryCalculations(invoiceDetailList);
+		
+	}
+	
+	@PostMapping(path = "/tailDiscountCalculations")
+	public Response<?> tailDiscountCalculations(
+			@RequestBody InvoiceDTO invoiceDTO
+			) {
+
+		log.info("Richiesta di calcuate tail discount.");
+
+		return invoiceService.tailDiscountCalculations(invoiceDTO);
 		
 	}
 

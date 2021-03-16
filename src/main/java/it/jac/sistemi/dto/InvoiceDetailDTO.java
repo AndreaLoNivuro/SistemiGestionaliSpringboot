@@ -26,6 +26,8 @@ public class InvoiceDetailDTO {
 	private Date expiry;
 
 	private float unitPrice;
+	
+	private float totalPrice;
 
 	private String discount;
 

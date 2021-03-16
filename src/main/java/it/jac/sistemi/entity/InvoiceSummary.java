@@ -30,10 +30,10 @@ public  class InvoiceSummary {
 	private float totalDiscount;
 	
 	@Column(name = "tail_discount")
-	private float tailDiscount;
+	private String tailDiscount;
 	
-	@Column(name = "total_tile_discount")
-	private float totalTileDiscount;
+	@Column(name = "total_tail_discount")
+	private float totalTailDiscount;
 	
 	@Column(name = "total_line_discount")
 	private float totalLineDiscount;

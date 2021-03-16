@@ -18,9 +18,9 @@ public class InvoiceSummaryDTO {
 	
 	private float totalDiscount;
 	
-	private float tailDiscount;
+	private String tailDiscount;
 	
-	private float totalTileDiscount;
+	private float totalTailDiscount;
 	
 	private float totalLineDiscount;
 	

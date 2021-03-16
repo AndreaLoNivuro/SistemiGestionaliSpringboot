@@ -49,6 +49,9 @@ public  class InvoiceDetail {
 	@Column(name = "unit_price")
 	private float unitPrice;
 	
+	@Column(name = "total_price")
+	private float totalPrice;
+	
 	@Column(name = "discount")
 	private String discount;
 	

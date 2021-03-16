@@ -61,100 +61,64 @@ public class InvoiceService {
 		return response;
 	}
 
-	//	public Response<InvoiceDetail> lineCalculations(InvoiceDetail invoiceDetail) {
-	//
-	//		Response<InvoiceDetail> response = new Response<InvoiceDetail>();
-	//
-	//		try {
-	//
-	//			Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
-	//			Vat vat = this.vatRepository.findById(item.getVat()).get();
-	//
-	//			invoiceDetail.setDescription(item.getDescription());
-	//			invoiceDetail.setMeasure(item.getMeasure());
-	//			invoiceDetail.setCodVat(item.getVat());
-	//			invoiceDetail.setUnitPrice(item.getPrice());
-	//
-	//			invoiceDetail.setTotalDiscount(
-	//					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())*Float.parseFloat(invoiceDetail.getDiscount())/100
-	//					);
-	//
-	//			invoiceDetail.setTaxable(
-	//					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())-invoiceDetail.getTotalDiscount()
-	//					);
-	//
-	//			invoiceDetail.setTotalVat(
-	//					(invoiceDetail.getTaxable()*vat.getVat())/100
-	//					);
-	//
-	//			invoiceDetail.setTotalLine(
-	//					invoiceDetail.getTaxable()+invoiceDetail.getTotalVat()
-	//					);
-	//
-	//			response.setResult(invoiceDetail);
-	//
-	//			log.info("Calcoli Invoice Detail.");
-	//
-	//		} catch (Exception e) {
-	//
-	//			response.setError("Invoice non eliminata.");
-	//
-	//			log.info("Invoice non eliminata.");
-	//
-	//		}
-	//
-	//		return response;
-	//	}
-
 	public Response<InvoiceDetail> lineCalculations(InvoiceDetail invoiceDetail) {
 
 		Response<InvoiceDetail> response = new Response<InvoiceDetail>();
 
-		//List<String> discountList = new ArrayList<String>();
 		try {
 
+			//ricerca item selezionato
 			Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
-			Vat vat = this.vatRepository.findById(item.getVat()).get();
 
-			invoiceDetail.setDescription(item.getDescription());
-			invoiceDetail.setMeasure(item.getMeasure());
-			invoiceDetail.setCodVat(item.getVat());
-			invoiceDetail.setUnitPrice(item.getPrice());
+			//impostazione dei valori in caso non fossero stati modificati a frontend
+			if (invoiceDetail.getDescription() != "") {
+				invoiceDetail.setDescription(item.getDescription());
+			}
+			if (invoiceDetail.getMeasure() != "") {
+				invoiceDetail.setMeasure(item.getMeasure());
+			}
+			if (invoiceDetail.getCodVat() != "") {
+				invoiceDetail.setCodVat(item.getVat());
+			}
+			if (invoiceDetail.getUnitPrice() != 0) {
+				invoiceDetail.setUnitPrice(item.getPrice());
+			}
 
-			log.info("1");
+			//ricerca iva corrispondete
+			Vat vat = this.vatRepository.findById(invoiceDetail.getCodVat()).get();
 
-			float total = invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice();
+			//calcolo total price
+			invoiceDetail.setTotalPrice(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice());
+
+			//variabile per il calcolo dello sconto
+			float total = invoiceDetail.getTotalPrice();
 			float totalDiscount = 0;
 
 			if (invoiceDetail.getDiscount() != "") {
-				log.info("2");
-				log.info("discountString con spazi");
-				log.info(invoiceDetail.getDiscount());
-				log.info("discountString senza spazzi");
-				log.info(invoiceDetail.getDiscount().replaceAll("\\s+", "").toString());
+
+				//rimozione spazzi dalla stringa di sconto
 				String discountString = invoiceDetail.getDiscount().replaceAll("\\s+", "");
 
-				log.info("discountString");
-				log.info(discountString);
+				//split della stringa di sconto
 				String[] discountList = discountString.split("\\+");
-				log.info("prova");
-				log.info("sconto" + discountList[0]);
+
+				//ciclo che calcola lo sconto
 				for (String discount: discountList) {
 					totalDiscount += (total*Float.parseFloat(discount))/100;
+					total -= totalDiscount;
 				}
 			}
-			log.info("3");
+			
+			//impostazione del totale sconto e dell'imponibile
 			invoiceDetail.setTotalDiscount(totalDiscount);
-			log.info("4");
+			invoiceDetail.setTaxable(total);
 
-			invoiceDetail.setTaxable(
-					(invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice())-invoiceDetail.getTotalDiscount()
-					);
-			log.info("5");
+			//calcolo iva
 			invoiceDetail.setTotalVat(
 					(invoiceDetail.getTaxable()*vat.getVat())/100
 					);
-			log.info("6");
+			
+			//calcolo totale riga
 			invoiceDetail.setTotalLine(
 					invoiceDetail.getTaxable()+invoiceDetail.getTotalVat()
 					);
@@ -185,10 +149,11 @@ public class InvoiceService {
 		log.info("lista");
 		log.info(invoiceDetailList.toString());
 
+		//inizializzazione valori
 		float totalProducts = 0;
 		float totalServices = 0;
-		float tailDiscount = 0;
-		float totalTileDiscount = 0;
+		//float tailDiscount = 0;
+		//float totalTileDiscount = 0;
 		float totalLineDiscount = 0;
 		float taxable = 0;
 		float totalVat = 0;
@@ -198,12 +163,14 @@ public class InvoiceService {
 			for (InvoiceDetail invoiceDetail: invoiceDetailList) {
 				Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
 
+				//calcolo total products o total service
 				if (item.getType().equalsIgnoreCase("Servizio")) {
-					totalServices += (invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice());
+					totalServices += (invoiceDetail.getTotalPrice());
 				} else {
-					totalProducts += (invoiceDetail.getQuantity()*invoiceDetail.getUnitPrice());
+					totalProducts += (invoiceDetail.getTotalPrice());
 				}
-
+				
+				//somma valori per ogni dettaglio
 				totalLineDiscount += invoiceDetail.getTotalDiscount();
 				taxable += invoiceDetail.getTaxable();
 				totalVat += invoiceDetail.getTotalVat();
@@ -212,10 +179,10 @@ public class InvoiceService {
 
 			invoiceSummary.setTotalProducts(totalProducts);
 			invoiceSummary.setTotalServices(totalServices);
-			invoiceSummary.setTailDiscount(tailDiscount);
-			invoiceSummary.setTotalTileDiscount(totalTileDiscount);
+			//invoiceSummary.setTailDiscount(tailDiscount);
+			//invoiceSummary.setTotalTileDiscount(totalTileDiscount);
 			invoiceSummary.setTotalLineDiscount(totalLineDiscount);
-			invoiceSummary.setTotalDiscount(totalTileDiscount + totalLineDiscount);
+			invoiceSummary.setTotalDiscount(/*totalTileDiscount + */totalLineDiscount);
 			invoiceSummary.setTotalVat(totalVat);
 			invoiceSummary.setTaxable(taxable);
 			invoiceSummary.setTotalAmount(taxable+totalVat);
@@ -236,14 +203,15 @@ public class InvoiceService {
 
 		return response;
 	}
-
+	
 	public Response<InvoiceDTO> tailDiscountCalculations(InvoiceDTO invoiceDTO) {
 
 		Response<InvoiceDTO> response = new Response<InvoiceDTO>();
 
 		log.info("tail discount");
 
-		float totalTileDiscount = 0;
+		float totalLineDiscount = 0;
+		float totalTailDiscount = 0;
 		float taxable = 0;
 		float totalVat = 0;
 		float totalAmount = 0;
@@ -253,16 +221,33 @@ public class InvoiceService {
 			for (InvoiceDetail invoiceDetail: invoiceDTO.getInvoiceDetailList()) {
 
 				Vat vat = this.vatRepository.findById(invoiceDetail.getCodVat()).get();
-
 				//calcolo total line discount summary
-				//totalLineDiscount += invoiceDetail.getTotalDiscount();
+				totalLineDiscount += invoiceDetail.getTotalDiscount();
+
+				//valori per il calcolo tail discount
+				float total = invoiceDetail.getTaxable();
+				float tailDiscount = 0;
 
 				//calcolo tail discount riga
-				float tailDiscount = invoiceDetail.getTaxable()*invoiceDTO.getInvoiceSummary().getTailDiscount()/100;
+				if (invoiceDTO.getInvoiceSummary().getTailDiscount() != "") {
+
+					//rimozione spazzi dalla stringa di sconto
+					String discountString = invoiceDTO.getInvoiceSummary().getTailDiscount().replaceAll("\\s+", "");
+
+					//split della stringa di sconto
+					String[] discountList = discountString.split("\\+");
+
+					//ciclo che calcola lo sconto
+					for (String discount: discountList) {
+						tailDiscount += (total*Float.parseFloat(discount))/100;
+						total -= tailDiscount;
+					}
+				}
+				
 				//calcolo total discount riga
-				invoiceDetail.setTotalDiscount(invoiceDetail.getTotalDiscount()+tailDiscount);
+				invoiceDetail.setTotalDiscount(invoiceDetail.getTotalDiscount() + tailDiscount);
 				//calcolo total tail discount summary
-				totalTileDiscount += tailDiscount;
+				totalTailDiscount += tailDiscount;
 
 				//calcolo taxable riga 
 				invoiceDetail.setTaxable(invoiceDetail.getTaxable() - tailDiscount);
@@ -282,8 +267,8 @@ public class InvoiceService {
 			}
 
 			//set nuovi valori in summary
-			invoiceDTO.getInvoiceSummary().setTotalTileDiscount(totalTileDiscount);
-			invoiceDTO.getInvoiceSummary().setTotalDiscount(invoiceDTO.getInvoiceSummary().getTotalDiscount()+totalTileDiscount);
+			invoiceDTO.getInvoiceSummary().setTotalTailDiscount(totalTailDiscount);
+			invoiceDTO.getInvoiceSummary().setTotalDiscount(invoiceDTO.getInvoiceSummary().getTotalDiscount() + totalTailDiscount);
 			invoiceDTO.getInvoiceSummary().setTaxable(taxable);
 			invoiceDTO.getInvoiceSummary().setTotalVat(totalVat);
 			invoiceDTO.getInvoiceSummary().setTotalAmount(totalAmount);

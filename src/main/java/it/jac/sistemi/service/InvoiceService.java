@@ -71,16 +71,16 @@ public class InvoiceService {
 			Item item = this.itemRepository.findById(invoiceDetail.getCodItem()).get();
 
 			//impostazione dei valori in caso non fossero stati modificati a frontend
-			if (invoiceDetail.getDescription() != "") {
+			if (invoiceDetail.getDescription() == "" || invoiceDetail.getDescription() == null) {
 				invoiceDetail.setDescription(item.getDescription());
 			}
-			if (invoiceDetail.getMeasure() != "") {
+			if (invoiceDetail.getMeasure() == "" || invoiceDetail.getMeasure() == null ) {
 				invoiceDetail.setMeasure(item.getMeasure());
 			}
-			if (invoiceDetail.getCodVat() != "") {
+			if (invoiceDetail.getCodVat() == "" || invoiceDetail.getCodVat() == null ) {
 				invoiceDetail.setCodVat(item.getVat());
 			}
-			if (invoiceDetail.getUnitPrice() != 0) {
+			if (invoiceDetail.getUnitPrice() == 0) {
 				invoiceDetail.setUnitPrice(item.getPrice());
 			}
 
@@ -94,7 +94,7 @@ public class InvoiceService {
 			float total = invoiceDetail.getTotalPrice();
 			float totalDiscount = 0;
 
-			if (invoiceDetail.getDiscount() != "") {
+			if (invoiceDetail.getDiscount() != "" && invoiceDetail.getDiscount() != null) {
 
 				//rimozione spazzi dalla stringa di sconto
 				String discountString = invoiceDetail.getDiscount().replaceAll("\\s+", "");

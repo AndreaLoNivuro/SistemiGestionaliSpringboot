@@ -51,7 +51,7 @@ public class InvoiceController {
 			@RequestBody InvoiceDetail invoiceDetail
 			) {
 
-		log.info("Richiesta di delete Invoice Detail.");
+		log.info("Richiesta di calculate Invoice Detail.");
 
 		return invoiceService.lineCalculations(invoiceDetail);
 		

@@ -57,6 +57,7 @@ public class InvoiceDetailService {
 
 	public Response<String> deleteInvoiceDetailByCodInvoice(int codInvoice) {
 
+		log.info("Richiesta di delete invoice Detail by codInvoice.");
 		Response<String> response = new Response<String>();
 
 		try {
@@ -70,10 +71,12 @@ public class InvoiceDetailService {
 			}	
 
 			response.setResult("Invoice Detail eliminato.");
+			log.info("Invoice Detail eliminato.");
 
 		} catch (Exception e) {
 
 			response.setError("Invoice Detail non eliminato.");
+			log.info("Invoice Detail non eliminato.");
 
 		}
 
